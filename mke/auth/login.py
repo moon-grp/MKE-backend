@@ -1,3 +1,7 @@
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
 from flask import Blueprint, jsonify, request, Flask
 from flask_pymongo import PyMongo
 
@@ -7,7 +11,11 @@ import validators
 from bson import json_util
 from bson.json_util import dumps
 import json
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
+# register blueprint
 loginEndPoint = Blueprint("loginEndPoint", __name__)
 
 
@@ -17,7 +25,7 @@ def login():
     email = "abankab@gmail.com"
     password = data["password"]
 
-    o_pass = "mrMKEkay"
+    o_pass = os.getenv("PASSCODE")
     hashed = bcrypt.hashpw(o_pass.encode("utf-8"), bcrypt.gensalt(12))
     if password:
         if bcrypt.checkpw(password.encode("utf-8"), hashed):
@@ -25,8 +33,8 @@ def login():
             access_token = create_access_token(identity={"email": email})
 
             res = jsonify({
-            "message": "Welcome, mr kay..",
-            "token": access_token
+                "message": "Welcome, mr kay..",
+                "token": access_token
             })
 
             return res, 200
