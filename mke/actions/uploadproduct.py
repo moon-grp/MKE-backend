@@ -7,7 +7,6 @@ import cloudinary as cloud
 from cloudinary import uploader as uploadit
 import os
 from slugify import slugify
-from werkzeug.datastructures import ImmutableDict
 
 
 # cloudinary config
@@ -26,12 +25,10 @@ collection = db["frames"]
 uploadEndPoint = Blueprint("uploadEndPoint", __name__)
 
 
-@uploadEndPoint.route("/addframe", methods=["POST"])
+@uploadEndPoint.route("/addproduct", methods=["POST"])
 def uploadFrames():
 
     data = request.json
-    d = dict(request.form)
-    dd = request.form.get("name")
 
     #name = data["name"]
     #collection.insert_one({"name": name})
@@ -44,21 +41,23 @@ def uploadFrames():
 
     # working on image
     frame_img = request.files["frame_img"]
-    uploadToCloud = uploadit.upload(frame_img, )
-    getImageUrl = uploadToCloud["url"]
+    if productName and framePrice and available and description and slashPrice and frame_img:
 
-    priceToFloat = float(framePrice)
-    slashToFloat = float(slashPrice)
-    availableToBol = bool(available)
+        uploadToCloud = uploadit.upload(frame_img, )
+        getImageUrl = uploadToCloud["url"]
 
-    collection.insert_one({
-        "productname": productName,
-        "frameprice": priceToFloat,
-        "available": availableToBol,
-        "imgUrl": getImageUrl,
-        "slashprice": slashToFloat,
-        "slug": slug,
-        "description": description
-    })
+        priceToFloat = float(framePrice)
+        slashToFloat = float(slashPrice)
+        availableToBol = bool(available)
+
+        collection.insert_one({
+            "productname": productName,
+            "frameprice": priceToFloat,
+            "available": availableToBol,
+            "imgUrl": getImageUrl,
+            "slashprice": slashToFloat,
+            "slug": slug,
+            "description": description
+        })
 
     return "product uploaded...", 200

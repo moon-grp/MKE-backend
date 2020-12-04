@@ -1,6 +1,10 @@
 from flask import Flask
 from auth.login import loginEndPoint
-from actions.uploadimage import uploadEndPoint
+from actions.uploadproduct import uploadEndPoint
+from actions.updateproduct import editEndPoint
+from actions.deleteproduct import deleteEndPoint
+from actions.viewallproduct import viewallEndPoint
+from actions.viewproduct import viewEndPoint
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
@@ -8,13 +12,16 @@ from flask_jwt_extended import (
 import os
 
 
-
 app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = 'mrkayenterpricemrkayframes'  # Change this!
 jwt = JWTManager(app)
 
-app.register_blueprint(loginEndPoint, url_prefix="/api/v1")
-app.register_blueprint(uploadEndPoint, url_prefix="/api/v1")
+app.register_blueprint(loginEndPoint, url_prefix="/api/v1/admin")
+app.register_blueprint(uploadEndPoint, url_prefix="/api/v1/admin")
+app.register_blueprint(editEndPoint, url_prefix="/api/v1/admin")
+app.register_blueprint(deleteEndPoint, url_prefix="/api/v1/admin")
+app.register_blueprint(viewallEndPoint, url_prefix="/api/v1/admin")
+app.register_blueprint(viewEndPoint, url_prefix="/api/v1/admin")
 
 
 if __name__ == "__main__":
