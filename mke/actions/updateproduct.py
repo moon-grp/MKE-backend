@@ -8,6 +8,10 @@ import cloudinary as cloud
 from cloudinary import uploader as uploadit
 import os
 from slugify import slugify
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
 
 
 # cloudinary config
@@ -27,6 +31,7 @@ editEndPoint = Blueprint("editEndPoint", __name__)
 
 
 @editEndPoint.route("/editproduct/<id>", methods=["POST"])
+@jwt_required
 def updateFrame(id):
 
     productName = request.form.get("productName")

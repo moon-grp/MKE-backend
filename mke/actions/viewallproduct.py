@@ -6,7 +6,10 @@ from bson.objectid import ObjectId
 import os
 from bson.json_util import dumps
 from bson import json_util
-
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
 
 # mongo db connection
 Connection = os.getenv("MONGO_SRI")
@@ -19,6 +22,7 @@ viewallEndPoint = Blueprint("viewallEndPoint", __name__)
 
 
 @viewallEndPoint.route("/viewproducts", methods=["GET"])
+@jwt_required
 def view():
     products = collection.find()
     resp = json_util.dumps(products, indent=4)

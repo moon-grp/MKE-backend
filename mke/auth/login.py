@@ -22,7 +22,7 @@ loginEndPoint = Blueprint("loginEndPoint", __name__)
 @loginEndPoint.route("/signin", methods=["POST"])
 def login():
     data = request.json
-    email = "abankab@gmail.com"
+    email = os.getenv("EMAIL")
     password = data["password"]
 
     o_pass = os.getenv("PASSCODE")

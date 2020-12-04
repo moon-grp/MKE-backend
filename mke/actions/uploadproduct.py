@@ -7,6 +7,10 @@ import cloudinary as cloud
 from cloudinary import uploader as uploadit
 import os
 from slugify import slugify
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
 
 
 # cloudinary config
@@ -26,6 +30,7 @@ uploadEndPoint = Blueprint("uploadEndPoint", __name__)
 
 
 @uploadEndPoint.route("/addproduct", methods=["POST"])
+@jwt_required
 def uploadFrames():
 
     data = request.json
