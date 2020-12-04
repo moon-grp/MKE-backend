@@ -11,4 +11,4 @@ cloudinary
 blueprint
 pymongo
 slugify
-dotenv
+python-dotenv
