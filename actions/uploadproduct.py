@@ -65,4 +65,6 @@ def uploadFrames():
             "description": description
         })
 
-    return "product uploaded...", 200
+        return "product uploaded...", 200
+    else:
+        return "enter important values", 400
