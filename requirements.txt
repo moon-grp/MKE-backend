@@ -10,5 +10,5 @@ flask_jwt_extended
 cloudinary
 blueprint
 pymongo
-slugify
+python-slugify
 python-dotenv
