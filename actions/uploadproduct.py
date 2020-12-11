@@ -46,7 +46,7 @@ def uploadFrames():
 
     # working on image
     frame_img = request.files["frame_img"]
-    if productName and framePrice and available and description and slashPrice and frame_img:
+    if productName and framePrice and description and slashPrice and frame_img:
 
         uploadToCloud = uploadit.upload(frame_img, )
         getImageUrl = uploadToCloud["url"]
