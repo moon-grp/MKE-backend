@@ -7,6 +7,7 @@ from actions.viewallproduct import viewallEndPoint
 from actions.viewproduct import viewEndPoint
 from user.getallproducts import viewallEndPointU
 from user.getproduct import viewEndPointU
+from user.pay import payEndPointU
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
@@ -26,6 +27,7 @@ app.register_blueprint(viewallEndPoint, url_prefix="/api/v1/admin")
 app.register_blueprint(viewEndPoint, url_prefix="/api/v1/admin")
 app.register_blueprint(viewallEndPointU, url_prefix="/api/v1/user")
 app.register_blueprint(viewEndPointU, url_prefix="/api/v1/user")
+app.register_blueprint(payEndPointU, url_prefix="/api/v1/user")
 
 
 if __name__ == "__main__":

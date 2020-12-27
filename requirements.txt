@@ -12,3 +12,4 @@ blueprint
 pymongo
 python-slugify
 python-dotenv
+requests
