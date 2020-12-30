@@ -39,7 +39,7 @@ def view():
         'Authorization': f'Bearer {paystack}'})
 
    # print(verifyPayments.content)
-    data = json.loads(verifyPayments.content)
+   # data = json.loads(verifyPayments.content)
 
     transDate = data["data"]["transaction_date"]
 
@@ -49,6 +49,6 @@ def view():
         "Customer Phone": customerPhone,
         "Customer Address": customerAddress,
         "Date": transDate,
-        "Transcation Data": data})
+    })
 
     return "Transaction successful..", 200
