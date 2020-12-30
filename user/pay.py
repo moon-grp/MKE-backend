@@ -41,7 +41,7 @@ def view():
    # print(verifyPayments.content)
    # data = json.loads(verifyPayments.content)
 
-    transDate = data["data"]["transaction_date"]
+    #transDate = data["data"]["transaction_date"]
 
     collection.insert_one({
         "Customer Name": customerName,
