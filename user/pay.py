@@ -43,15 +43,4 @@ def view():
 
     # transDate = data["data"]["transaction_date"]
 
-  """ 
-   collection.insert_one({
-        "Customer Name": customerName,
-        "Customer Email": customerEmail,
-        "Customer Phone": customerPhone,
-        "Customer Address": customerAddress,
-        "Date": transDate,
-    })  
-    
-    """
-
     return "Transaction successful..", 200
