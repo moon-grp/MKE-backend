@@ -38,9 +38,17 @@ def view():
     verifyPayments = requests.get(f"https://api.paystack.co/transaction/verify/{referenceCode}",  headers={
         'Authorization': f'Bearer {paystack}'})
 
-    print(verifyPayments.content)
-   # data = json.loads(verifyPayments.content)
+    data = json.loads(verifyPayments.content)
 
-    # transDate = data["data"]["transaction_date"]
+    transDate = data["data"]["transaction_date"]
+
+    collection.insert_one({
+        "Customer Name": customerName,
+        "Customer Email": customerEmail,
+        "Customer Phone": customerPhone,
+        "Customer Address": customerAddress,
+        "Date": transDate,
+        "Data": data
+    })
 
     return "Transaction successful..", 200
