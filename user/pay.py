@@ -50,8 +50,8 @@ def view():
         "Customer Phone": customerPhone,
         "Customer Address": customerAddress,
         "Date": transDate,
-        "Product Name": productName
-        "Quantity": qtr
+        "Product Name": productName,
+        "Quantity": qtr,
         "Data": data,
 
     })
