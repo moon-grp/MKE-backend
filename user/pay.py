@@ -34,6 +34,7 @@ def view():
     customerEmail = data["customerEmail"]
     customerPhone = data["customerPhone"]
     customerAddress = data["customerAddress"]
+    productName = data["productName"]
     qtr = data["qtr"]
 
     verifyPayments = requests.get(f"https://api.paystack.co/transaction/verify/{referenceCode}",  headers={
@@ -49,6 +50,7 @@ def view():
         "Customer Phone": customerPhone,
         "Customer Address": customerAddress,
         "Date": transDate,
+        "Product Name": productName
         "Quantity": qtr
         "Data": data,
 
