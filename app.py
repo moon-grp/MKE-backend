@@ -13,10 +13,12 @@ from flask_jwt_extended import (
     get_jwt_identity
 )
 import os
+from flask_cors import CORS
 
 
 app = Flask(__name__)
-app.config['JWT_SECRET_KEY'] = 'mrkayenterpricemrkayframes'  # Change this!
+cors = app(CORS)
+app.config['JWT_SECRET_KEY'] = os.getenv("JWT_S_KEY")
 jwt = JWTManager(app)
 
 app.register_blueprint(loginEndPoint, url_prefix="/api/v1/admin")
