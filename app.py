@@ -17,6 +17,7 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app)
 app.config['JWT_SECRET_KEY'] = os.getenv("JWT_S_KEY")
 jwt = JWTManager(app)
 
