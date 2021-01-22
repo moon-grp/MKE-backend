@@ -12,6 +12,7 @@ from flask_jwt_extended import (
 )
 import requests
 import json
+import smtplib
 
 
 # mongo db connection
