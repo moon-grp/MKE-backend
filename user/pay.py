@@ -21,6 +21,9 @@ client = MongoClient(Connection)
 db = client["frames_db"]
 collection = db["orders"]
 
+emailAddress = os.getenv("BASE_EMAIL")
+emailPassword = os.getenv("BASE_P")
+
 
 payEndPointU = Blueprint("payEndPointU", __name__)
 
@@ -45,15 +48,35 @@ def view():
     transDate = data["data"]["transaction_date"]
 
     collection.insert_one({
-        "Customer Name": customerName,
-        "Customer Email": customerEmail,
-        "Customer Phone": customerPhone,
-        "Customer Address": customerAddress,
+        "CustomerName": customerName,
+        "CustomerEmail": customerEmail,
+        "CustomerPhone": customerPhone,
+        "CustomerAddress": customerAddress,
         "Date": transDate,
-        "Product Name": productName,
+        "ProductName": productName,
         "Quantity": qtr,
         "Data": data,
+        "delivered": False
 
     })
 
+    mail()
+
     return "Transaction successful..", 200
+
+
+def mail():
+    with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.ehlo()
+
+        smtp.login(emailAddress, emailPassword)
+
+        subject = "New Order"
+        body = f"New Order just came in check dashboard."
+
+        msg = f'subject:  {subject}\n\n{body}'
+
+        #smtp.sendmail(emailAddress, "gogechi8@gmail.com", msg)
+        smtp.sendmail(emailAddress, "mrkayenterprise@gmail.com", msg)

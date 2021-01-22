@@ -15,16 +15,17 @@ from flask_jwt_extended import (
 Connection = os.getenv("MONGO_SRI")
 client = MongoClient(Connection)
 db = client["frames_db"]
-collection = db["frames"]
+collection = db["orders"]
 
 
 
-viewallEndPointU = Blueprint("viewallEndPointU", __name__)
+viewOrderEndPointU = Blueprint("viewOrderEndPointU", __name__)
 
 
-@viewallEndPointU.route("/viewproducts", methods=["GET"])
+@viewOrderEndPointU.route("/vieworders", methods=["GET"])
+@jwt_required
 def view():
     products = collection.find()
     resp = json_util.dumps(products, indent=4)
 
-    return resp , 200
+    return resp ,200
