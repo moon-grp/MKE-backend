@@ -22,8 +22,8 @@ cloud.config(cloud_name=os.getenv("CLOUD_NAME"),
 # mongo db connection
 Connection = os.getenv("MONGO_SRI")
 client = MongoClient(Connection)
-db = client["frames_db"]
-collection = db["frames"]
+db = client["autos_db"]
+collection = db["cars"]
 
 
 autosAdminCEndPoint = Blueprint("autosAdminCEndPoint", __name__)
@@ -37,34 +37,30 @@ def uploadFrames():
 
     #name = data["name"]
     #collection.insert_one({"name": name})
-    productName = request.form.get("productName")
-    framePrice = request.form.get("framePrice")
-    available = request.form.get("available")
+    carName = request.form.get("carName")
+    carPrice = request.form.get("carPrice")
+    #available = request.form.get("available")
     description = request.form.get("description")
-    slashPrice = request.form.get("slashPrice")
-    slug = slugify(productName)
+    commission = request.form.get("commission")
+    slug = slugify(carName)
 
     # working on image
-    frame_img = request.files["frame_img"]
-    if productName and framePrice and description and slashPrice and frame_img:
+    car_img = request.files["car_img"]
 
-        uploadToCloud = uploadit.upload(frame_img, )
-        getImageUrl = uploadToCloud["url"]
+    uploadToCloud = uploadit.upload(car_img, )
+    getImageUrl = uploadToCloud["url"]
 
-        priceToFloat = float(framePrice)
-        slashToFloat = float(slashPrice)
-        availableToBol = bool(available)
+    priceToFloat = float(carPrice)
+    comToFloat = float(commission)
 
-        collection.insert_one({
-            "productname": productName,
-            "frameprice": priceToFloat,
-            "available": availableToBol,
-            "imgUrl": getImageUrl,
-            "slashprice": slashToFloat,
-            "slug": slug,
-            "description": description
-        })
+    collection.insert_one({
+        "carname": carName,
+        "carprice": priceToFloat,
+        "available": True,
+        "description": description,
+        "commission": comToFloat,
+        "mediaUrl": getImageUrl,
+        "slug": slug
+    })
 
-        return "product uploaded...", 200
-    else:
-        return "enter important values", 400
+    return "post created...", 200
