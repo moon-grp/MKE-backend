@@ -29,16 +29,27 @@ def view():
     products = collection.find()
     resp = json_util.dumps(products, indent=4)
     '''
+
+    offset = 0
+    offset = int(request.args["offset"])
     startingId = collection.find().sort("_id", pymongo.ASCENDING)
-    lastId = startingId[0]["_id"]
+    lastId = startingId[offset]["_id"]
     numbers = collection.find({
-        "_id":{
-            "$gte":lastId
+        "_id": {
+            "$gte": lastId
         }
     }).sort("_id", pymongo.ASCENDING).limit(5)
 
-   
+    nextUrl = offset + 5
+    prevUrl = offset - 5
 
-    resp = json_util.dumps(numbers, indent=4)
+    resp = json_util.dumps({
+        "result": numbers,
+        "pre_url": prevUrl,
+        "next_url": nextUrl
+    }, indent=4)
 
     return resp
+
+
+#work on getting upset fixes using conditional statement
