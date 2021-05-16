@@ -25,15 +25,15 @@ viewallEndPoint = Blueprint("viewallEndPoint", __name__)
 @viewallEndPoint.route("/viewproducts", methods=["GET"])
 @jwt_required
 def view():
-    '''
+    
     products = collection.find()
     resp = json_util.dumps(products, indent=4)
+    
     '''
-
     offset = 0
-    offset = int(request.args["offset"])
+    #offset = int(request.args["offset"])
     startingId = collection.find().sort("_id", pymongo.ASCENDING)
-    lastId = startingId[offset]["_id"]
+    lastId = startingId[5]["_id"]
     numbers = collection.find({
         "_id": {
             "$gte": lastId
@@ -48,7 +48,7 @@ def view():
         "pre_url": prevUrl,
         "next_url": nextUrl
     }, indent=4)
-
+    '''
     return resp
 
 
