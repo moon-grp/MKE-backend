@@ -12,6 +12,7 @@ from flask_jwt_extended import (
 )
 import ssl
 import smtplib
+from flask_cors import CORS, cross_origin
 
 # mongo db connection
 Connection = os.getenv("MONGO_SRI")
@@ -30,6 +31,7 @@ pOrderEndPointU = Blueprint("pOrderEndPointU", __name__)
 
 @pOrderEndPointU.route("/processorder/<id>", methods=["POST"])
 # @jwt_required
+@cross_origin()
 def view(id):
     data = request.json
     orderEmail = data["orderEmail"]
