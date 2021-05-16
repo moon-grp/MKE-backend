@@ -31,7 +31,7 @@ pOrderEndPointU = Blueprint("pOrderEndPointU", __name__)
 
 @pOrderEndPointU.route("/processorder/<id>", methods=["POST"])
 # @jwt_required
-@cross_origin()
+@cross_origin(origin='*')
 def view(id):
     data = request.json
     orderEmail = data["orderEmail"]
