@@ -11,6 +11,7 @@ from user.pay import payEndPointU
 from actions.vieworders import viewOrderEndPointU
 from autos.admin.createpost import autosAdminCEndPoint
 from actions.processorder import pOrderEndPointU
+from autos.refs.signup import signUpEndPoint
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
@@ -36,6 +37,7 @@ app.register_blueprint(payEndPointU, url_prefix="/api/v1/user")
 app.register_blueprint(viewOrderEndPointU, url_prefix="/api/v1/user")
 app.register_blueprint(pOrderEndPointU, url_prefix="/api/v1/user")
 app.register_blueprint(autosAdminCEndPoint, url_prefix="/api/v1/autos")
+app.register_blueprint(signUpEndPoint, url_prefix="/api/v1/autos")
 
 
 if __name__ == "__main__":

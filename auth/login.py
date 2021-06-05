@@ -33,7 +33,7 @@ def login():
             access_token = create_access_token(identity={"email": email})
 
             res = jsonify({
-                "message": "Welcome, mr kay..",
+                "message": "Welcome, kay..",
                 "token": access_token
             })
 
