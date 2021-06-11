@@ -49,7 +49,7 @@ def createacc():
         return "username is missing", 400
 
     if validators.email(email) != True:
-        return "Boba says email is not valid", 400
+        return "email is not valid", 400
 
     hashed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt(12))
 

@@ -14,6 +14,12 @@ from actions.processorder import pOrderEndPointU
 from autos.refs.signup import signUpEndPoint
 from autos.refs.signin import signInEndPoint
 from autos.refs.profile import createProfileEndPoint
+from autos.refs.test import testEndPoint
+from autos.admin.deletepost import deleteEndPointC
+from autos.admin.updatepost import editEndPointC
+from autos.admin.viewposts import viewallEndPointC
+from autos.admin.viewpost import viewEndPointC
+from autos.refs.viewgarage import viewCarDetailsEndPointC
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
@@ -42,6 +48,12 @@ app.register_blueprint(autosAdminCEndPoint, url_prefix="/api/v1/autos")
 app.register_blueprint(signUpEndPoint, url_prefix="/api/v1/autos")
 app.register_blueprint(signInEndPoint, url_prefix="/api/v1/autos")
 app.register_blueprint(createProfileEndPoint, url_prefix="/api/v1/autos")
+app.register_blueprint(testEndPoint, url_prefix="/api/v1/autos")
+app.register_blueprint(deleteEndPointC, url_prefix="/api/v1/autos")
+app.register_blueprint(editEndPointC, url_prefix="/api/v1/autos")
+app.register_blueprint(viewallEndPointC, url_prefix="/api/v1/autos")
+app.register_blueprint(viewEndPointC, url_prefix="/api/v1/autos")
+app.register_blueprint(viewCarDetailsEndPointC, url_prefix="/api/v1/autos")
 
 
 if __name__ == "__main__":

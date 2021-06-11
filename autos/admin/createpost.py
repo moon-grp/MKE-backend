@@ -11,6 +11,7 @@ from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
 )
+import ssl
 
 
 # cloudinary config
@@ -21,7 +22,7 @@ cloud.config(cloud_name=os.getenv("CLOUD_NAME"),
 
 # mongo db connection
 Connection = os.getenv("MONGO_SRI")
-client = MongoClient(Connection)
+client = MongoClient(Connection, ssl_cert_reqs=ssl.CERT_NONE)
 db = client["autos_db"]
 collection = db["cars"]
 
