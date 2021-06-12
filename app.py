@@ -14,7 +14,6 @@ from actions.processorder import pOrderEndPointU
 from autos.refs.signup import signUpEndPoint
 from autos.refs.signin import signInEndPoint
 from autos.refs.profile import createProfileEndPoint
-from autos.refs.test import testEndPoint
 from autos.admin.deletepost import deleteEndPointC
 from autos.admin.updatepost import editEndPointC
 from autos.admin.viewposts import viewallEndPointC
@@ -29,6 +28,9 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
+
+app.config['CORS_HEADERS'] = "Content-Type"
+app.config['CORS_RESOURCES'] = {r"/api/*": {"origins": "*"}}
 CORS(app)
 app.config['JWT_SECRET_KEY'] = os.getenv("JWT_S_KEY")
 jwt = JWTManager(app)
@@ -48,7 +50,7 @@ app.register_blueprint(autosAdminCEndPoint, url_prefix="/api/v1/autos")
 app.register_blueprint(signUpEndPoint, url_prefix="/api/v1/autos")
 app.register_blueprint(signInEndPoint, url_prefix="/api/v1/autos")
 app.register_blueprint(createProfileEndPoint, url_prefix="/api/v1/autos")
-app.register_blueprint(testEndPoint, url_prefix="/api/v1/autos")
+
 app.register_blueprint(deleteEndPointC, url_prefix="/api/v1/autos")
 app.register_blueprint(editEndPointC, url_prefix="/api/v1/autos")
 app.register_blueprint(viewallEndPointC, url_prefix="/api/v1/autos")
