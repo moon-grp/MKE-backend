@@ -25,6 +25,7 @@ Connection = os.getenv("MONGO_SRI")
 client = MongoClient(Connection, ssl_cert_reqs=ssl.CERT_NONE)
 db = client["autos_db"]
 collection = db["cars"]
+collection2 = db["userfacing"]
 
 
 autosAdminCEndPoint = Blueprint("autosAdminCEndPoint", __name__)

@@ -19,6 +19,8 @@ from autos.admin.updatepost import editEndPointC
 from autos.admin.viewposts import viewallEndPointC
 from autos.admin.viewpost import viewEndPointC
 from autos.refs.viewgarage import viewCarDetailsEndPointC
+from autos.user.viewcollection import userViewallEndPointC
+from autos.user.viewdetails import userViewCarDetailsEndPointC
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
@@ -56,7 +58,8 @@ app.register_blueprint(editEndPointC, url_prefix="/api/v1/autos")
 app.register_blueprint(viewallEndPointC, url_prefix="/api/v1/autos")
 app.register_blueprint(viewEndPointC, url_prefix="/api/v1/autos")
 app.register_blueprint(viewCarDetailsEndPointC, url_prefix="/api/v1/autos")
-
+app.register_blueprint(userViewallEndPointC, url_prefix="/api/v1/autos")
+app.register_blueprint(userViewCarDetailsEndPointC, url_prefix="/api/v1/autos")
 
 if __name__ == "__main__":
     app.run(debug=True)
