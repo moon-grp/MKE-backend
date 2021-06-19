@@ -14,7 +14,7 @@ import ssl
 
 # mongo db connection
 Connection = os.getenv("MONGO_SRI")
-client = MongoClient(Connection, ssl_cert_reqs=ssl.CERT_NONE)
+client = MongoClient(Connection)
 db = client["autos_db"]
 collection = db["cars"]
 
